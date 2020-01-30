@@ -63,6 +63,11 @@ hits_tib <- hits_mat %>%
 # write .csv
 # write_csv(hits_tib, "data/scopus-trait-hits.csv")
 
+
+# Read in the previous chunk of code from a .csv --------------------------
+
+hits_tib <- read_csv("data/scopus-trait-hits.csv")
+
 # heatmap in ggplot2 by spp
 hits_tib %>% mutate(hits_sqrt = sqrt(hits)) %>% 
   ggplot(aes(x = trait, y = species, fill = hits)) +
@@ -77,7 +82,7 @@ hits_tib %>% group_by(trait, genus) %>%
   ggplot(aes(x = trait, y = genus, fill = hits)) +
   geom_raster() +
   coord_fixed() +
-  scale_fill_viridis() +
+  scale_fill_viridis_c() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   labs(fill = "Sqrt Hits") +
   xlab("Searched Trait") +
