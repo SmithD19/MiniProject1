@@ -1,0 +1,166 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2020.1.31)  31 JAN 2020 11:53
+entering extended mode
+**C:/Users/Daniel/Documents/GitHub/MiniProject1/co1_alignment.tex
+(C:/Users/Daniel/Documents/GitHub/MiniProject1/co1_alignment.tex
+LaTeX2e <2019-10-01> patch level 3
+("C:\Program Files\MiKTeX 2.9\tex/latex/base\article.cls"
+Document Class: article 2019/10/25 v1.4k Standard LaTeX document class
+("C:\Program Files\MiKTeX 2.9\tex/latex/base\size10.clo"
+File: size10.clo 2019/10/25 v1.4k Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files\MiKTeX 2.9\tex/latex/texshade\texshade.sty"
+Package: texshade 2018/01/17 LaTeX TeXshade (v1.25)
+
+Package `texshade', Version 1.25 of 2018/01/17.
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\color.sty"
+Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: dvips.def on input line 147.
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics-def\dvips.def"
+File: dvips.def 2017/06/20 v3.1d Graphics/color driver for dvips
+)
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\dvipsnam.def"
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+))
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\graphics.sty"
+Package: graphics 2019/11/01 v1.3d Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics-def\pdftex.def"
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\structurefile=\read1
+\featurefile=\write3
+\alignfile=\read2
+\sublogofile=\read3
+\exp@rtfile=\write4
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\amssymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks14
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+\symalphahelix=\mathgroup6
+\loopcount=\count88
+\innerloopcount=\count89
+\outerloopcount=\count90
+\seq@count=\count91
+\killseq@count=\count92
+\seq@percent=\count93
+\res@count=\count94
+\seq@pointer=\count95
+\pos@count=\count96
+\res@perline=\count97
+\end@count=\count98
+\cons@count=\count99
+\total@count=\count100
+\temp@count=\count101
+\triple@count=\count102
+\temp@@count=\count103
+\pos@sum=\count104
+\box@width=\skip43
+\name@width=\skip44
+\box@depth=\skip45
+\width@tmp=\skip46
+\box@height=\skip47
+\number@width=\skip48
+\line@stretch=\skip49
+\center@fill=\skip50
+\arrow@width=\skip51
+\arrow@height=\skip52
+\rule@thick=\skip53
+\arrow@thick=\skip54
+\logo@height=\skip55
+\equal@width=\skip56
+\equal@tmp=\skip57
+\equal@height=\skip58
+\temp@@length=\skip59
+\vspace@legend=\skip60
+\hspace@legend=\skip61
+\bar@length=\skip62
+Package color Info: Redefining color LightGray on input line 1705.
+Package color Info: Redefining color LightLightGray on input line 1806.
+Package color Info: Redefining color LightLightLightGray on input line 1908.
+)
+No file co1_alignment.aux.
+\openout1 = `co1_alignment.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+("C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count105
+\scratchdimen=\dimen103
+\scratchbox=\box27
+\nofMPsegments=\count106
+\nofMParguments=\count107
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count108
+\MPscratchDim=\dimen104
+\MPnumerator=\count109
+\makeMPintoPDFobject=\count110
+\everyMPtoPDFconversion=\toks16
+) ("C:\Program Files\MiKTeX 2.9\tex/latex/epstopdf-pkg\epstopdf-base.sty"
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+)
+(C:/Users/Daniel/AppData/Local/Temp/RtmpYrWz7q/seqb38483824eb.fasta:
+! TeX capacity exceeded, sorry [input stack size=5000].
+\seq@line ->
+            ...................................................................
+l.144 \end{texshade}
+                    
+If you really absolutely need more capacity,
+you can ask a wizard to enlarge me.
+
+ 
+Here is how much of TeX's memory you used:
+ 36273 strings out of 492482
+ 461972 string characters out of 3131022
+ 1170050 words of memory out of 3000000
+ 40657 multiletter control sequences out of 15000+200000
+ 4281 words of font info for 17 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 5000i,1n,57p,237b,49502s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!

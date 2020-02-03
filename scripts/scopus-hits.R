@@ -70,7 +70,7 @@ hits_tib <- read_csv("data/scopus-trait-hits.csv")
 
 # heatmap in ggplot2 by spp
 hits_tib %>% mutate(hits_sqrt = sqrt(hits)) %>% 
-  ggplot(aes(x = trait, y = species, fill = hits)) +
+  ggplot(aes(x = trait, y = species, fill = hits_sqrt)) +
   geom_tile() +
   scale_fill_viridis_c()
 
