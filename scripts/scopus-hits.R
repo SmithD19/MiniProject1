@@ -100,3 +100,16 @@ hits_tib %>% #group_by(trait, species) %>%
 scaler <- function(x){(x-min(x))/(max(x)-min(x))}
 
 
+# Hits for lit review -----------------------------------------------------
+
+# What species to search for?
+
+search <- "Distribution AND \"Aedes albopictus\""
+
+get_hits(search)
+
+
+
+
+
+
