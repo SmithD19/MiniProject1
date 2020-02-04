@@ -48,6 +48,9 @@ virus_mat <- dist.alignment(virus_align_2, "identity")
 # Phylogeny - ape ---------------------------------------------------------
 
 library(ape)
+library(phytools)
+
+# virus_mat <- read_csv("data/virus-mat.csv")
 
 virus_tree <- nj(virus_mat)
 

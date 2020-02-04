@@ -4,6 +4,23 @@ library(tidyverse)
 # Species here under scientific name
 ncbi_spp <- read_csv("data/resolved-ncbi-species.csv")
 
+# Tree using just taxonomy - taxize ---------------------------------------
+
+library(taxize)
+
+class_mosquito <- classification(ncbi_spp$scientificname, db = "ncbi")
+
+class_mosquito <- class_mosquito[!duplicated(class_mosquito)]
+
+common_tree <- class2tree(class_mosquito)
+
+plot(common_tree)
+
+common_tree$distmat
+
+
+# Accession Numbers -------------------------------------------------------
+
 # Load functions
 source("scripts/genbank-scraping.R")
 
@@ -55,10 +72,12 @@ its2_alignment_2 <- msaConvert(its2_alignment, type = "seqinr::alignment")
 
 library(seqinr)
 
-co1_mat <- dist.alignment(co1_alignment_2, "identity")
+# co1_mat <- dist.alignment(co1_alignment_2, "identity")
 
-its2_mat <- dist.alignment(its2_alignment_2, "identity")
+# its2_mat <- dist.alignment(its2_alignment_2, "identity")
 
+# just load the saved matrices now
+co1_mat <- read.csv("data/co1-dist-mat.csv", row.names = 1) %>% as.matrix()
 
 # Phylogeny - ape ---------------------------------------------------------
 
@@ -68,9 +87,9 @@ co1_tree <- nj(co1_mat)
 
 plot(co1_tree, main = "Phylogenetic Tree of COI in Mosquitoes")
 
-its2_tree <- nj(its2_mat)
-
-plot(its2_tree, main = "Phylogenetic Tree of ITS2 in Mosquitoes")
+# its2 contains little information ---
+# its2_tree <- nj(its2_mat)
+# plot(its2_tree, main = "Phylogenetic Tree of ITS2 in Mosquitoes")
 
 library(ggtree)
 
@@ -85,26 +104,13 @@ to_drop <- c("Anopheles_apoci","Anopheles_superpictus","Ochlerotatus_cyprius",
              "Ochlerotatus_eatoni_hewitti_(nomen_nudum)", "Acartomyia_mariae")
 
 co1_tree %>% 
-  # drop.tip(to_drop) %>% 
+  #drop.tip(to_drop) %>% 
   ggtree(branch.length = "none") + 
   geom_tiplab() +
   coord_cartesian(clip = 'off') + 
   theme_tree2(plot.margin=margin(6, 120, 6, 6)) +
 geom_label2(aes(subset=!isTip, label=node), size=2, color="darkred", alpha=0.5)
 
-# Tree using just taxonomy - taxize ---------------------------------------
-
-library(taxize)
-
-class_mosquito <- classification(ncbi_spp$scientificname, db = "ncbi")
-
-class_mosquito <- class_mosquito[!duplicated(class_mosquito)]
-
-common_tree <- class2tree(class_mosquito)
-
-plot(common_tree)
-
-common_tree$distmat
 
 
 
