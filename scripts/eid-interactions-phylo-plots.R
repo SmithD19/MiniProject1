@@ -72,7 +72,7 @@ mos_vir_mat <-
   distinct() %>%
   mutate(interaction = 1) %>%
   mutate(scientificname = mos_name) %>%
-  select(-mos_name, -mostaxid, -vtaxid) %>%
+  select(-mos_name, -mostaxid, vtaxid) %>%
   # join?
   full_join(ncbi_spp) %>%
   # now aggregate the rows into one
