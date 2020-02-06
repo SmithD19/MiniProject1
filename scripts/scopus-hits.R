@@ -68,11 +68,19 @@ hits_tib <- hits_mat %>%
 
 hits_tib <- read_csv("data/scopus-trait-hits.csv")
 
+
 # heatmap in ggplot2 by spp
 hits_tib %>% mutate(hits_sqrt = sqrt(hits)) %>% 
-  ggplot(aes(x = trait, y = species, fill = hits_sqrt)) +
-  geom_tile() +
-  scale_fill_viridis_c()
+  ggplot(aes(x = trait, 
+             y = paste0(substr(genus, start = 1, stop = 2),". ", species), 
+             fill = hits_sqrt)) +
+  geom_tile(col = "black") +
+  scale_fill_viridis_c() +
+  labs(fill = "Sqrt Hits") +
+  xlab("Searched Trait") +
+  ylab("Mosquito Species") +
+  theme_bw() +
+  theme(panel.grid = element_blank())
 
 # heatmap by genus
 hits_tib %>% group_by(trait, genus) %>% 
@@ -80,7 +88,7 @@ hits_tib %>% group_by(trait, genus) %>%
     hits = sqrt(sum(hits))
     ) %>%
   ggplot(aes(x = trait, y = genus, fill = hits)) +
-  geom_raster() +
+  geom_tile(col = "black") +
   coord_fixed() +
   scale_fill_viridis_c() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +

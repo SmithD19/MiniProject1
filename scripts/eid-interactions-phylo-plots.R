@@ -77,8 +77,9 @@ mos_vir_mat <-
   full_join(ncbi_spp) %>%
   # now aggregate the rows into one
   group_by(scientificname, virus_name) %>%
-  summarise_if(is.numeric, funs(sum)) %>% 
+  summarise_if(is.numeric, sum) %>% 
   ungroup()
+
 # mutate_if(is.numeric, ~ replace(., is.na(.), 0))
 
 
@@ -108,6 +109,12 @@ mos_vir_mat <-
 
 # fuzzytest ---------------------------------------------------------------
 
+# pre req for coming code - load in tree
+library(ape)
+library(ggtree)
+co1_mat <- read.csv("data/co1-dist-mat.csv", row.names = 1) %>% as.matrix()
+co1_tree <- nj(co1_mat)
+
 y <- 
   # get the co1 tree
   co1_tree %>% 
@@ -118,7 +125,8 @@ y <-
   drop_na() %>% 
   # get rid of any more words than 2
   mutate(scientificname = 
-           y$label %>% 
+           # little tdy magic here - no idea how this works with %>% ?!?!?!
+           label %>% 
            str_replace_all("_", " ") %>% 
            word(start = 1L, end = 2L))
 
@@ -128,7 +136,7 @@ z <-
   stringdist_inner_join(y, mos_vir_mat, max_dist = 1) %>% 
   mutate(virus_code = 
            case_when(
-             virus_name == "West Nile Virus" ~ "WNV",
+             virus_name == "West Nile virus" ~ "WNV",
              virus_name == "Dengue virus 1" ~ "DNV1",
              virus_name == "Dengue virus 2" ~ "DNV2",
              virus_name == "Dengue virus 3" ~ "DNV3",
@@ -212,3 +220,80 @@ gheatmap(p4, zz,
        col = "Genus")
 
 
+
+# Making interaction plots - bipartite ------------------------------------
+
+library(bipartite)
+
+# net <- 
+#   mos_vir_mat %>%
+#   # get rid of ones with no interaction
+#   drop_na() %>% 
+#   # change the names so easier to read
+#   mutate(virus_code = 
+#            case_when(
+#              virus_name == "West Nile virus" ~ "WNV",
+#              virus_name == "Dengue virus 1" ~ "DNV1",
+#              virus_name == "Dengue virus 2" ~ "DNV2",
+#              virus_name == "Dengue virus 3" ~ "DNV3",
+#              virus_name == "Dengue virus 4" ~ "DNV4",
+#              virus_name == "Yellow fever virus" ~ "YFV",
+#              virus_name == "Japanese encephalitis virus" ~ "JEV",
+#              virus_name == "Saint Louis encephalitis virus" ~ "SLEV",
+#              virus_name == "Murray Valley encephalitis virus" ~ "MVEV"
+#            )) %>% 
+#   mutate(webID = "Qualitative-EID2") %>% 
+#   select(lower = scientificname, 
+#          higher = virus_name,
+#          webID,
+#          freq = interaction) %>% 
+#   frame2webs()
+
+library(igraph)
+
+net <- # THIS IS CONVOLUTED ---- BUT WORKS :SHRUGEMOJI:
+  mos_vir_mat %>%
+  # get rid of ones with no interaction
+  drop_na() %>% 
+  # Shorten names
+  mutate(short_name = paste0(substr(scientificname, 1, 2), ". ", word(scientificname, 2L))) %>% 
+  # change the names so easier to read
+  mutate(virus_code = 
+           case_when(
+             virus_name == "West Nile virus" ~ "WNV",
+             virus_name == "Dengue virus 1" ~ "DNV1",
+             virus_name == "Dengue virus 2" ~ "DNV2",
+             virus_name == "Dengue virus 3" ~ "DNV3",
+             virus_name == "Dengue virus 4" ~ "DNV4",
+             virus_name == "Yellow fever virus" ~ "YFV",
+             virus_name == "Japanese encephalitis virus" ~ "JEV",
+             virus_name == "Saint Louis encephalitis virus" ~ "SLEV",
+             virus_name == "Murray Valley encephalitis virus" ~ "MVEV"
+           )) %>% 
+  select(short_name, virus_code) %>% 
+  as.matrix() %>% 
+  graph_from_edgelist() %>% 
+  igraph::as_edgelist() %>% 
+  as.data.frame() %>% 
+  mutate(webID = "QualEID2",
+         freq = 1) %>% 
+  select(
+    lower = V1,
+    higher = V2,
+    webID,
+    freq
+  ) %>% 
+  frame2webs()
+
+bipartite::plotweb(net$QualEID2)
+
+palvirus = viridis::viridis(10)
+palmos = viridis::viridis(50)
+
+bipartite::plotweb(net$QualEID2, 
+                   text.rot = 90, 
+                   col.high = palvirus,
+                   col.low = palmos,
+                   arrow = "up",
+                   low.y = .6)
+  
