@@ -75,7 +75,7 @@ hits_tib %>% mutate(hits_sqrt = sqrt(hits)) %>%
              y = paste0(substr(genus, start = 1, stop = 2),". ", species), 
              fill = hits_sqrt)) +
   geom_tile(col = "black") +
-  scale_fill_viridis_c() +
+  scale_fill_viridis_c(values = c(0.1,1)) +
   labs(fill = "Sqrt Hits") +
   xlab("Searched Trait") +
   ylab("Mosquito Species") +
@@ -84,13 +84,15 @@ hits_tib %>% mutate(hits_sqrt = sqrt(hits)) %>%
 
 # heatmap by genus
 hits_tib %>% group_by(trait, genus) %>% 
+  # na_if(0) %>% 
   summarise(
     hits = sqrt(sum(hits))
     ) %>%
   ggplot(aes(x = trait, y = genus, fill = hits)) +
   geom_tile(col = "black") +
   coord_fixed() +
-  scale_fill_viridis_c() +
+  scale_fill_viridis_c(values = c(0.1,1)) +
+  # scale_fill_gradientn(colours = c("white", "green", "red"), values = c(0,0.1,1)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   labs(fill = "Sqrt Hits") +
   xlab("Searched Trait") +
