@@ -297,3 +297,75 @@ bipartite::plotweb(net$QualEID2,
                    arrow = "up",
                    low.y = .6)
   
+
+# picante -----------------------------------------------------------------
+
+net$QualEID2 %>% class
+
+net2 <- # THIS IS CONVOLUTED ---- BUT WORKS :SHRUGEMOJI:
+  mos_vir_mat %>%
+  # get rid of ones with no interaction
+  drop_na()  %>% 
+  select(scientificname, virus_name) %>% 
+  as.matrix() %>% 
+  graph_from_edgelist() %>% 
+  igraph::as_edgelist() %>% 
+  as.data.frame() %>% 
+  mutate(webID = "QualEID2",
+         freq = 1) %>% 
+  select(
+    lower = V1,
+    higher = V2,
+    webID,
+    freq
+  ) %>% 
+  frame2webs()
+
+
+# picante? ----------------------------------------------------------------
+
+virus_mat <- read.csv("data/virus-mat.csv", row.names = 1) %>% as.matrix()
+virus_tree <- nj(virus_mat)
+
+virus_tree$tip.label <- c("X03700.1 Yellow fever virus complete genome, 17D vaccine strain",
+                          "NC_001477.1 Dengue virus 1, complete genome",
+                          "NC_001474.2 Dengue virus 2, complete genome", 
+                          "NC_001475.2 Dengue virus 3, complete genome", 
+                          "NC_002640.1 Dengue virus 4, complete genome ", 
+                          "NC_007580.2 Saint Louis encephalitis virus, complete genome ",
+                          "M12294.2 West Nile virus RNA, complete genome ", 
+                          "NC_000943.1 Murray Valley encephalitis virus, complete genome", 
+                          "NC_001437.1 Japanese encephalitis virus, genome")
+
+colnames(net2$QualEID2) <- c("NC_001477.1 Dengue virus 1, complete genome",
+                             "NC_001474.2 Dengue virus 2, complete genome", 
+                             "NC_001475.2 Dengue virus 3, complete genome", 
+                             "NC_002640.1 Dengue virus 4, complete genome ",
+                             "NC_001437.1 Japanese encephalitis virus, genome",
+                             "NC_000943.1 Murray Valley encephalitis virus, complete genome",
+                             "NC_007580.2 Saint Louis encephalitis virus, complete genome ",
+                             "M12294.2 West Nile virus RNA, complete genome ",
+                             "X03700.1 Yellow fever virus complete genome, 17D vaccine strain"
+                             )
+
+
+co1_tree$tip.label <- co1_tree$tip.label %>% str_replace("_", " ")
+
+co1_tree$tip.label
+
+rownames(net2$QualEID2) %in% mostree$tip.label
+
+net2$QualEID2 <- net2$QualEID2[-3,]
+
+mostree <- drop.tip(co1_tree, setdiff(co1_tree$tip.label, rownames(net2$QualEID2)))
+
+library(picante)
+
+model1 <- pblm(net2$QualEID2, mostree, virus_tree, bootstrap = TRUE)
+model1$MSE
+model1$CI.boot
+model1$variates
+model1$predicted
+model1$phylocovs$V1
+
+plot(model1$residuals)
