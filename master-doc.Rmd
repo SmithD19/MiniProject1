@@ -2,7 +2,10 @@
 title: "Working Report"
 author: "Daniel Smith"
 date: "10/02/2020"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
@@ -41,7 +44,7 @@ head(ncbi_spp) %>%
 ```
 
 
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # A minimal plot
 library(DiagrammeR)
 
@@ -58,27 +61,5 @@ DiagrammeR("
 
 
 
-```{r}
-library(DiagrammeR)
-grViz("
-digraph boxes_and_circles {
 
-  # a 'graph' statement
-  graph [overlap = true, fontsize = 10]
-
-  # several 'node' statements
-  node [shape = box,
-        fontname = Helvetica]
-  A; B; C; D; E; F
-
-  node [shape = circle,
-        fixedsize = true,
-        width = 0.9] // sets as circles
-  1; 2; 3; 4; 5; 6; 7; 8
-
-  # several 'edge' statements
-
-}
-")
-```
 
