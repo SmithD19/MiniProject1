@@ -1,0 +1,65 @@
+---
+title: "Working Report"
+author: "Daniel Smith"
+date: "10/02/2020"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+```
+
+# Mini-project 1: Role of biological traits, phylogenetic relatedness and invasion status in determining the role of mosquito species in disease transmission
+
+Many mosquito species are prolific vectors of debilitating diseases. Presence of these vectors incurs significant economic and health burdens on human populations globally in both developed and developing nations. Three distinct clades are of global importance from a public health perspective: *Aedes*, *Culex* and *Anopholes*. These three genera of mosquito are responsible for the majority of zoonotic transmissions of Culicidae (ref). 
+
+The mechanism of vector competence and transmission likelihood is a significant area of research in the medical sciences. Increasing the scope of this research to a continent level approach that would allow incorporation of molecular and physiological research with that from spatial ecology and invasion science would improve stakeholder decision making processes, better informing organisations about the risk of vector-borne disease prevalence across regional scales. Implementing this more holistic approach would require the use of metrics that appropriately incorporate characteristics of both vector competence and distributional ecology of vectors.
+
+We suggest that incorporating trait-based approaches into existing multivariate methods might provide a framework that allows traits to explain the distribution and vector-borne disease risk component of mosquitoes across a regional scale and a changing climate.   
+
+## What data is available for current integration into a model?
+
+Mosquitoes are speciose and present on every continent except Antarctica. Current estimates of species present in the Palearctic region at 7 genera and 139 species. This number is likely underestimated, as mosquitoes are cryptic species, remaining very difficult to identify by all but experienced entomologists. This is further confounded by a mosquito’s complex lifecycle, of which they go through many stages from egg, larvae and adult. Recent advents in genetic sequencing means that identification of mosquitoes can now be compared and ratified both taxonomically and genetically, most notably resulting in the splitting of the Aedes genus into both Aedes and Ochlerotatus. This upheaval in the taxonomic history of Culicidae has resulted in many species with multiple taxonomic names that are used interchangeably.
+
+To try and account for the discrepancy and confusion around Culicidae taxonomy, large external and internationally relevant databases should be incorporated into analysis to ensure confusion between species is minimised. For this purpose the NCBI taxonomic database provides each recognised organism with a unique identifier that can be used in place on its scientific name, reducing the likelihood of misidentification of a species. 
+
+Matching relevant species to their Unique Identifiers (UID) in NCBI can be accomplished by systematic searching of their database to return a unique list of organisms and their corresponding names and UIDS. This list of UIDs can then be used to determine what mosquitoes have genetic data available for sequencing and phylogenetic reconstruction (using NCBI GenBank), and those that are known to be associated with disease vectors of the genus Flaviridae (Using the ENHanCEd Infectious Disease Databases 2). 
+
+```{r eval=FALSE, include=FALSE}
+ncbi_spp <-
+  # read in the csv
+  read.csv("data/resolved-ncbi-species.csv") %>% 
+  dplyr::select(Name = scientificname, Common = commonname) %>% 
+  mutate_at("Common", str_to_title)
+
+
+ncbi_skim <- ncbi_spp %>% skimr::skim()
+
+
+head(ncbi_spp) %>% 
+  knitr::kable(caption = "The number of species that are present in both NCBI taxonomy database, have available COI sequences in GenBank, and are present in the EID2 interaction database")
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# A minimal plot
+library(DiagrammeR)
+
+DiagrammeR("
+  graph TD;
+    
+    A[139 Species] -- NCBI Taxonomy --> B[115 Species];
+    B -- NCBI GenBank --> C[107 Species];
+    C -- Present EID2 --> D[49 Vector Species];
+    C -- Absence EID2 --> E[58 Non-Vector Species]
+    
+  ")
+```
+
+
+
+
+
